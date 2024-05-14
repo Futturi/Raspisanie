@@ -1,0 +1,12 @@
+port: "8080"
+
+db:
+  host: "post"
+  port: "5432"
+  username: "root"
+  password: "root"
+  namedb: "root"
+  sslmode: "disable"
+red:
+  port: "6379"
+  host: "localhost"
