@@ -9,10 +9,11 @@ type Repository struct {
 	Raspisanie
 	Auth
 	WSRepo
+	UserRepo
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
-	return &Repository{Raspisanie: NewRaspRepo(db), Auth: NewAuthRepo(db), WSRepo: NewWSRepository(db)}
+	return &Repository{Raspisanie: NewRaspRepo(db), Auth: NewAuthRepo(db), WSRepo: NewWSRepository(db), UserRepo: NewUser_Repo(db)}
 }
 
 type Raspisanie interface {
@@ -34,4 +35,9 @@ type WSRepo interface {
 	InsertUser(clientId, roomId string) error
 	DeleteUser(id, roomid string) error
 	GetIdUser(username string) (string, error)
+}
+
+type UserRepo interface {
+	GetUser(id string) (entities.User, error)
+	UpdateUser(id string, user entities.UpdateUser) error
 }

@@ -21,7 +21,7 @@ func (h *Handler) InitRoutes(wsHan *ws.Handler) http.Handler {
 	serv := gin.Default()
 
 	serv.Use(cors.New(cors.Config{
-		AllowMethods:     []string{"GET", "POST"},
+		AllowMethods:     []string{"GET", "POST", "PUT"},
 		AllowHeaders:     []string{"Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
@@ -37,10 +37,12 @@ func (h *Handler) InitRoutes(wsHan *ws.Handler) http.Handler {
 	}
 	api := serv.Group("/api", h.CheckIdentity)
 	{
+		api.GET("/getuser", h.GetUser)
 		api.POST("/", h.GetRasp)
 		api.POST("/createroom", wsHan.CreateRoom)
 		api.GET("/joinroom/:roomId", wsHan.JoinRoom)
 		api.GET("/rooms", wsHan.GetRooms)
+		api.PUT("/updateuser", h.UpdateUser)
 	}
 	return serv
 }

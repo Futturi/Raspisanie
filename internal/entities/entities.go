@@ -43,3 +43,10 @@ type User struct {
 	Name     string `json:"name"`
 	Group    string `json:"group"`
 }
+
+type UpdateUser struct {
+	Email    *string `json:"email"`
+	Password *string `json:"password"`
+	Name     *string `json:"name"`
+	Group    *string `json:"group"`
+}

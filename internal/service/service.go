@@ -9,10 +9,11 @@ type Serivce struct {
 	Raspisanie
 	Auth
 	WS
+	UserService
 }
 
 func NewSerivce(repo *repository.Repository) *Serivce {
-	return &Serivce{Raspisanie: NewRaspService(repo.Raspisanie), Auth: NewAuthService(repo.Auth), WS: NewWService(repo)}
+	return &Serivce{Raspisanie: NewRaspService(repo.Raspisanie), Auth: NewAuthService(repo.Auth), WS: NewWService(repo), UserService: NewUserService(repo.UserRepo)}
 }
 
 type Raspisanie interface {
@@ -34,4 +35,9 @@ type WS interface {
 	GetUsername(client_id string) (string, error)
 	InsertUser(clientId, roomId string) error
 	DeleteUser(id, roomid string) error
+}
+
+type UserService interface {
+	GetUser(id string) (entities.User, error)
+	UpdateUser(id string, user entities.UpdateUser) error
 }

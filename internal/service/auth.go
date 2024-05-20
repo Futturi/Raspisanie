@@ -56,7 +56,7 @@ func (a *AuthService) SignIn(user entities.User) (string, error) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{id, group, jwt.StandardClaims{
-		ExpiresAt: time.Now().Add(5 * time.Hour).Unix(),
+		ExpiresAt: time.Now().Add(24 * 7 * time.Hour).Unix(),
 		IssuedAt:  time.Now().Unix(),
 	}})
 
