@@ -19,7 +19,7 @@ func (r *User_Repo) GetUser(id string) (entities.User, error) {
 	var us entities.User
 	query := "SELECT email, password, name, groupa FROM users WHERE id = $1"
 	row := r.db.QueryRow(query, id)
-	if err := row.Scan(&us); err != nil {
+	if err := row.Scan(&us.Email, &us.Password, &us.Name, &us.Group); err != nil {
 		return entities.User{}, err
 	}
 	return us, nil

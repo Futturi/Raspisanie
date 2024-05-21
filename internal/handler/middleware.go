@@ -33,6 +33,7 @@ func (h *Handler) CheckIdentity(c *gin.Context) {
 	}
 	c.SetCookie(userHeader, fmt.Sprint(userId), 7200, "/", "localhost", false, false)
 	c.SetCookie(groupHeader, group, 7200, "/", "localhost", false, false)
-	c.Set(userHeader, userId)
+	c.Set(userHeader, fmt.Sprint(userId))
+	fmt.Println(group)
 	c.Set(groupHeader, group)
 }
